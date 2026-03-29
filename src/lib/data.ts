@@ -1,0 +1,338 @@
+import type { Category, Order, Product } from "@/lib/types";
+
+export const categories: Category[] = [
+  {
+    id: "cat-fashion",
+    name: "Fashion",
+    slug: "fashion",
+    description: "Street-ready looks for Nairobi days and weekend escapes.",
+    image:
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    id: "cat-home",
+    name: "Home Living",
+    slug: "home-living",
+    description: "Warm interiors, practical storage, and everyday home upgrades.",
+    image:
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    id: "cat-tech",
+    name: "Tech",
+    slug: "tech",
+    description: "Smart accessories and essentials for hustle, study, and travel.",
+    image:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    id: "cat-beauty",
+    name: "Beauty",
+    slug: "beauty",
+    description: "Self-care essentials curated for gifting and daily routines.",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+  },
+];
+
+export const products: Product[] = [
+  {
+    id: "prod-kitenge-bag",
+    slug: "kitenge-weekender-bag",
+    name: "Kitenge Weekender Bag",
+    description:
+      "A carry-all duffel with bold Kenyan print panels, interior pockets, and reinforced handles for trips across town or upcountry.",
+    price: 4850,
+    stock: 18,
+    rating: 4.8,
+    reviewCount: 36,
+    images: [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "fashion",
+    featured: true,
+    tags: ["Travel", "New"],
+  },
+  {
+    id: "prod-lamp",
+    slug: "woven-sisal-floor-lamp",
+    name: "Woven Sisal Floor Lamp",
+    description:
+      "A sculptural floor lamp with a woven shade that softens living rooms, studios, and calm bedroom corners.",
+    price: 6900,
+    stock: 9,
+    rating: 4.7,
+    reviewCount: 21,
+    images: [
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "home-living",
+    featured: true,
+    tags: ["Best Seller"],
+  },
+  {
+    id: "prod-earbuds",
+    slug: "swiftbuds-wireless-earbuds",
+    name: "SwiftBuds Wireless Earbuds",
+    description:
+      "Noise-reducing Bluetooth earbuds built for commute calls, gym sessions, and long battery life through the workday.",
+    price: 3200,
+    stock: 34,
+    rating: 4.5,
+    reviewCount: 58,
+    images: [
+      "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "tech",
+    featured: true,
+    tags: ["Popular"],
+  },
+  {
+    id: "prod-serum",
+    slug: "baobab-glow-serum",
+    name: "Baobab Glow Serum",
+    description:
+      "A lightweight face serum with baobab oil and niacinamide for an easy, everyday glow routine.",
+    price: 2150,
+    stock: 42,
+    rating: 4.9,
+    reviewCount: 87,
+    images: [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "beauty",
+    featured: false,
+    tags: ["Organic"],
+  },
+  {
+    id: "prod-chair",
+    slug: "accent-lounge-chair",
+    name: "Accent Lounge Chair",
+    description:
+      "A textured accent chair designed for compact apartments, home offices, and reading corners.",
+    price: 12400,
+    stock: 4,
+    rating: 4.6,
+    reviewCount: 14,
+    images: [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "home-living",
+    featured: false,
+    tags: ["Limited"],
+  },
+  {
+    id: "prod-watch",
+    slug: "city-runner-smart-watch",
+    name: "City Runner Smart Watch",
+    description:
+      "A slim smartwatch with fitness tracking, message previews, and all-day battery for active schedules.",
+    price: 8450,
+    stock: 15,
+    rating: 4.4,
+    reviewCount: 32,
+    images: [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "tech",
+    featured: false,
+    tags: ["Fitness"],
+  },
+  {
+    id: "prod-sneakers",
+    slug: "coastal-runner-sneakers",
+    name: "Coastal Runner Sneakers",
+    description:
+      "Lightweight everyday sneakers with breathable mesh, neutral tones, and all-day comfort for city movement.",
+    price: 5650,
+    stock: 26,
+    rating: 4.7,
+    reviewCount: 43,
+    images: [
+      "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "fashion",
+    featured: true,
+    tags: ["Staff Pick", "Urban"],
+  },
+  {
+    id: "prod-throw",
+    slug: "savanna-knit-throw",
+    name: "Savanna Knit Throw",
+    description:
+      "A soft layered throw blanket for sofas, guest rooms, and cozy evening setups with earthy texture.",
+    price: 2950,
+    stock: 22,
+    rating: 4.8,
+    reviewCount: 29,
+    images: [
+      "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "home-living",
+    featured: false,
+    tags: ["Cozy", "Giftable"],
+  },
+  {
+    id: "prod-speaker",
+    slug: "mini-party-bluetooth-speaker",
+    name: "Mini Party Bluetooth Speaker",
+    description:
+      "Portable room-filling sound with a rugged shell, punchy bass, and battery life built for weekends away.",
+    price: 4100,
+    stock: 19,
+    rating: 4.6,
+    reviewCount: 51,
+    images: [
+      "https://images.unsplash.com/photo-1507878866276-a947ef722fee?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "tech",
+    featured: true,
+    tags: ["Weekend", "Best Seller"],
+  },
+  {
+    id: "prod-candle",
+    slug: "hibiscus-soy-candle",
+    name: "Hibiscus Soy Candle",
+    description:
+      "A clean-burning candle with floral warmth and a subtle amber finish for shelves, desks, and gift boxes.",
+    price: 1650,
+    stock: 37,
+    rating: 4.9,
+    reviewCount: 66,
+    images: [
+      "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1602872029708-84d970d3388f?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "beauty",
+    featured: false,
+    tags: ["Giftable", "Calm"],
+  },
+  {
+    id: "prod-shirt",
+    slug: "linen-camp-shirt",
+    name: "Linen Camp Shirt",
+    description:
+      "Relaxed short-sleeve linen shirt cut for warm weather, quick styling, and easy travel packing.",
+    price: 3450,
+    stock: 31,
+    rating: 4.5,
+    reviewCount: 27,
+    images: [
+      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "fashion",
+    featured: false,
+    tags: ["Summer", "Minimal"],
+  },
+  {
+    id: "prod-desk",
+    slug: "compact-studio-desk",
+    name: "Compact Studio Desk",
+    description:
+      "A slim work desk for apartment living, creative setups, and students who need a clean focused corner.",
+    price: 9800,
+    stock: 7,
+    rating: 4.6,
+    reviewCount: 18,
+    images: [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "home-living",
+    featured: false,
+    tags: ["Workspace", "Apartment"],
+  },
+  {
+    id: "prod-charger",
+    slug: "magdock-fast-charger",
+    name: "MagDock Fast Charger",
+    description:
+      "A compact wireless charger for desks and bedside tables with fast power delivery and a stable angled dock.",
+    price: 2750,
+    stock: 44,
+    rating: 4.4,
+    reviewCount: 39,
+    images: [
+      "https://images.unsplash.com/photo-1585338447937-7082f8fc763d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "tech",
+    featured: false,
+    tags: ["Desk Setup", "Fast Charge"],
+  },
+  {
+    id: "prod-mask",
+    slug: "rose-clay-renewal-mask",
+    name: "Rose Clay Renewal Mask",
+    description:
+      "A creamy weekly treatment mask made for reset nights, clearer-looking skin, and a soft finish.",
+    price: 2350,
+    stock: 24,
+    rating: 4.8,
+    reviewCount: 54,
+    images: [
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1200&q=80",
+    ],
+    category: "beauty",
+    featured: true,
+    tags: ["Spa Night", "Glow"],
+  },
+];
+
+export const orders: Order[] = [
+  {
+    id: "ORD-1001",
+    customerName: "Aisha Njeri",
+    customerPhone: "0712345678",
+    customerEmail: "aisha@example.com",
+    address: "Kilimani, Nairobi",
+    total: 8050,
+    status: "processing",
+    paymentStatus: "paid",
+    mpesaReceipt: "RK21L0X8AB",
+    createdAt: "2026-03-24T10:30:00.000Z",
+    items: [
+      {
+        productId: "prod-earbuds",
+        name: "SwiftBuds Wireless Earbuds",
+        quantity: 1,
+        price: 3200,
+      },
+      {
+        productId: "prod-serum",
+        name: "Baobab Glow Serum",
+        quantity: 2,
+        price: 2150,
+      },
+    ],
+  },
+  {
+    id: "ORD-1002",
+    customerName: "Kevin Otieno",
+    customerPhone: "0798765432",
+    address: "Kisumu CBD, Kisumu",
+    total: 4850,
+    status: "pending",
+    paymentStatus: "pending",
+    createdAt: "2026-03-26T08:12:00.000Z",
+    items: [
+      {
+        productId: "prod-kitenge-bag",
+        name: "Kitenge Weekender Bag",
+        quantity: 1,
+        price: 4850,
+      },
+    ],
+  },
+];

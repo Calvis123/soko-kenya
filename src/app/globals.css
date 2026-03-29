@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6efe4;
+  --foreground: #1b1a17;
+  --muted: #735f48;
+  --card: rgba(255, 251, 245, 0.76);
+  --card-strong: #fffaf1;
+  --line: rgba(68, 52, 33, 0.14);
+  --brand: #bc5a2b;
+  --brand-dark: #913f1b;
+  --accent: #1f6b57;
+  --accent-strong: #1f6b57;
+  --shadow: 0 20px 60px rgba(52, 33, 11, 0.09);
+  --header-bg: rgba(246, 239, 228, 0.88);
+  --nav-pill: rgba(255, 251, 245, 0.72);
+  --nav-pill-shadow: 0 10px 26px rgba(52, 33, 11, 0.06);
+  --surface-elevated: rgba(255, 251, 245, 0.9);
+  --surface-soft: rgba(255, 251, 245, 0.72);
+  --surface-soft-hover: rgba(255, 255, 255, 0.92);
+  --search-shell: rgba(255, 251, 245, 0.94);
+  --search-input: rgba(255, 255, 255, 0.9);
+  --search-border: rgba(27, 26, 23, 0.12);
+  --search-ring: rgba(188, 90, 43, 0.18);
+  --search-icon-bg: rgba(188, 90, 43, 0.12);
+  --auth-hero-bg:
+    linear-gradient(145deg, rgba(255, 249, 241, 0.98) 0%, rgba(249, 233, 217, 0.98) 36%, rgba(238, 203, 171, 0.98) 100%);
+  --auth-hero-border: rgba(146, 93, 45, 0.18);
+  --auth-hero-shadow: 0 34px 90px rgba(52, 33, 11, 0.14);
+  --auth-hero-chip-bg: rgba(255, 255, 255, 0.78);
+  --auth-hero-chip-border: rgba(146, 93, 45, 0.16);
+  --auth-hero-chip-text: #7a3b18;
+  --auth-hero-text: #1f1a15;
+  --auth-hero-muted: rgba(31, 26, 21, 0.74);
+  --auth-panel-bg: rgba(255, 253, 249, 0.98);
+  --auth-input-bg: rgba(255, 255, 255, 1);
+  --auth-input-border: rgba(52, 33, 11, 0.22);
+  --auth-input-focus: rgba(188, 90, 43, 0.24);
+  --auth-input-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88), 0 10px 22px rgba(52, 33, 11, 0.06);
+  --auth-muted-card: rgba(255, 255, 255, 0.46);
+  --auth-pill-bg: rgba(255, 250, 242, 0.96);
+  --auth-panel-shadow: 0 28px 70px rgba(52, 33, 11, 0.12);
+  --product-card-bg: rgba(255, 251, 245, 0.82);
+  --product-tag-bg: rgba(255, 255, 255, 0.9);
+  --product-tag-text: #1b1a17;
+  --product-tag-shadow: 0 8px 20px rgba(52, 33, 11, 0.1);
+  --product-tag-border: rgba(27, 26, 23, 0.14);
+  --cta-solid: #1b1a17;
+  --cta-solid-hover: #312c27;
+  --hero-orb-a: rgba(31, 107, 87, 0.12);
+  --hero-orb-b: rgba(188, 90, 43, 0.12);
+  --eyebrow-border: rgba(145, 63, 27, 0.18);
+  --eyebrow-bg: rgba(255, 250, 241, 0.74);
+  --admin-shell-bg:
+    radial-gradient(circle at top left, rgba(188, 90, 43, 0.12), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(31, 107, 87, 0.12), transparent 22%);
+  --admin-sidebar-card: rgba(255, 251, 245, 0.82);
+  --admin-sidebar-panel: rgba(255, 250, 241, 0.9);
+  --admin-sidebar-link: rgba(255, 255, 255, 0.42);
+  --admin-sidebar-link-hover: rgba(255, 255, 255, 0.72);
+  --admin-sidebar-active: #1b1a17;
+  --admin-sidebar-active-muted: rgba(255, 255, 255, 0.72);
+  --admin-hero-bg: linear-gradient(145deg, rgba(255, 251, 245, 0.9), rgba(255, 247, 237, 0.72));
+  --admin-input-bg: rgba(255, 255, 255, 1);
+  --admin-input-border: rgba(68, 52, 33, 0.18);
+  --admin-input-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 10px 22px rgba(52, 33, 11, 0.05);
+  --admin-input-focus: rgba(188, 90, 43, 0.18);
+  --font-body: "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-display: "Arial Black", "Trebuchet MS", sans-serif;
+}
+
+:root[data-theme="dark"] {
+  --background: #0f1418;
+  --foreground: #f5efe6;
+  --muted: #b9aa96;
+  --card: rgba(22, 29, 35, 0.82);
+  --card-strong: #161f25;
+  --line: rgba(224, 210, 191, 0.12);
+  --brand: #d87843;
+  --brand-dark: #f0a16f;
+  --accent: #236d63;
+  --accent-strong: #2b8477;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+  --header-bg: rgba(10, 14, 18, 0.88);
+  --nav-pill: rgba(28, 37, 45, 0.92);
+  --nav-pill-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+  --surface-elevated: rgba(26, 35, 43, 0.96);
+  --surface-soft: rgba(30, 40, 49, 0.9);
+  --surface-soft-hover: rgba(40, 53, 64, 0.98);
+  --search-shell: rgba(20, 28, 34, 0.96);
+  --search-input: rgba(28, 38, 46, 0.96);
+  --search-border: rgba(245, 239, 230, 0.1);
+  --search-ring: rgba(216, 120, 67, 0.22);
+  --search-icon-bg: rgba(216, 120, 67, 0.14);
+  --auth-hero-bg: linear-gradient(145deg, #10161b 0%, #8f4620 42%, #d87843 100%);
+  --auth-hero-border: rgba(240, 161, 111, 0.12);
+  --auth-hero-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  --auth-hero-chip-bg: rgba(255, 255, 255, 0.1);
+  --auth-hero-chip-border: rgba(255, 255, 255, 0.14);
+  --auth-hero-chip-text: rgba(255, 244, 232, 0.9);
+  --auth-hero-text: #ffffff;
+  --auth-hero-muted: rgba(255, 255, 255, 0.78);
+  --auth-panel-bg: rgba(21, 29, 35, 0.96);
+  --auth-input-bg: rgba(33, 44, 53, 0.98);
+  --auth-input-border: rgba(245, 239, 230, 0.16);
+  --auth-input-focus: rgba(216, 120, 67, 0.24);
+  --auth-input-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 26px rgba(0, 0, 0, 0.22);
+  --auth-muted-card: rgba(255, 255, 255, 0.06);
+  --product-card-bg: rgba(24, 33, 40, 0.96);
+  --product-tag-bg: rgba(22, 31, 38, 0.94);
+  --product-tag-text: #f5efe6;
+  --product-tag-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  --product-tag-border: rgba(245, 239, 230, 0.12);
+  --cta-solid: #d87843;
+  --cta-solid-hover: #f0a16f;
+  --hero-orb-a: rgba(43, 132, 119, 0.28);
+  --hero-orb-b: rgba(216, 120, 67, 0.3);
+  --eyebrow-border: rgba(240, 161, 111, 0.22);
+  --eyebrow-bg: rgba(31, 40, 48, 0.92);
+  --admin-shell-bg:
+    radial-gradient(circle at top left, rgba(216, 120, 67, 0.3), transparent 20%),
+    radial-gradient(circle at 80% 18%, rgba(97, 61, 205, 0.12), transparent 16%),
+    radial-gradient(circle at bottom right, rgba(43, 132, 119, 0.24), transparent 18%);
+  --admin-sidebar-card: rgba(11, 16, 20, 0.96);
+  --admin-sidebar-panel: rgba(25, 35, 42, 0.98);
+  --admin-sidebar-link: rgba(29, 40, 48, 0.98);
+  --admin-sidebar-link-hover: rgba(42, 57, 68, 0.98);
+  --admin-sidebar-active: linear-gradient(145deg, rgba(27, 38, 46, 1), rgba(54, 73, 86, 0.98));
+  --admin-sidebar-active-muted: rgba(245, 239, 230, 0.78);
+  --admin-hero-bg:
+    linear-gradient(145deg, rgba(15, 21, 27, 0.99), rgba(30, 41, 49, 0.96)),
+    radial-gradient(circle at top right, rgba(216, 120, 67, 0.18), transparent 24%);
+  --admin-input-bg: rgba(34, 45, 54, 0.98);
+  --admin-input-border: rgba(245, 239, 230, 0.14);
+  --admin-input-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 26px rgba(0, 0, 0, 0.22);
+  --admin-input-focus: rgba(216, 120, 67, 0.22);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+  background-image:
+    radial-gradient(circle at top left, rgba(188, 90, 43, 0.16), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(31, 107, 87, 0.14), transparent 24%);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    background-image 0.25s ease;
+}
+
+:root[data-theme="dark"] body {
+  background-image:
+    radial-gradient(circle at top left, rgba(216, 120, 67, 0.24), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(43, 132, 119, 0.2), transparent 20%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(188, 90, 43, 0.2);
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.admin-field {
+  color-scheme: dark;
+  box-shadow: var(--admin-input-shadow);
+}
+
+.admin-field::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.admin-field:-webkit-autofill,
+.admin-field:-webkit-autofill:hover,
+.admin-field:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--foreground);
+  box-shadow:
+    0 0 0 1000px var(--admin-input-bg) inset,
+    var(--admin-input-shadow);
+  transition: background-color 9999s ease-out 0s;
+  caret-color: var(--brand);
+}
+
+.admin-field option {
+  color: var(--foreground);
+  background: var(--admin-input-bg);
+}
+
+.section-title {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--eyebrow-border);
+  background: var(--eyebrow-bg);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand-dark);
+}
+
+.fade-in {
+  animation: fade-in 0.6s ease-out both;
+}
+
+.rise-in {
+  animation: rise-in 0.7s ease-out both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
