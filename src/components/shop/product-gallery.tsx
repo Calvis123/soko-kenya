@@ -19,7 +19,7 @@ export function ProductGallery({
   const activeSafeImage = safeImages[activeImage] ?? safeImages[0];
 
   return (
-    <div className="grid gap-4 lg:grid-cols-[110px_minmax(0,1fr)]">
+    <div className="grid gap-4 lg:grid-cols-[110px_minmax(0,1fr)] lg:items-start">
       <div className="order-2 grid grid-cols-4 gap-3 lg:order-1 lg:grid-cols-1">
         {safeImages.map((image, index) => (
           <button
@@ -45,8 +45,8 @@ export function ProductGallery({
         ))}
       </div>
 
-      <div className="order-1 glass-card overflow-hidden rounded-[2rem] lg:order-2">
-        <div className="relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[460px]">
+      <div className="order-1 glass-card overflow-hidden rounded-[2rem] lg:order-2 lg:self-start">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
           <Image
             src={activeSafeImage}
             alt={name}
