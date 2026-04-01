@@ -1,13 +1,19 @@
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--line)] py-10">
-      <div className="page-shell grid gap-6 md:grid-cols-[1.3fr_1fr_1fr]">
+    <footer className="border-t border-[var(--line)] bg-[var(--footer-bg)] py-12">
+      <div className="page-shell grid gap-8 md:grid-cols-[1.3fr_0.9fr_0.9fr_0.9fr]">
         <div>
-          <p className="font-mono text-2xl font-semibold">Soko Kenya</p>
+          <p className="text-2xl font-semibold">Soko Kenya</p>
           <p className="mt-3 max-w-md text-sm leading-7 text-[var(--muted)]">
-            MVP e-commerce storefront for the Kenyan market with cart,
-            checkout, order tracking, and M-Pesa-ready backend scaffolding.
+            Curated laptops, phone accessories, desk gear, and everyday tech
+            essentials designed for a cleaner and more premium shopping experience.
           </p>
+        </div>
+        <div>
+          <p className="font-semibold">Shop</p>
+          <p className="mt-3 text-sm text-[var(--muted)]">Laptops</p>
+          <p className="mt-1 text-sm text-[var(--muted)]">Accessories</p>
+          <p className="mt-1 text-sm text-[var(--muted)]">Desk setup</p>
         </div>
         <div>
           <p className="font-semibold">Customer care</p>

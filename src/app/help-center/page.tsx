@@ -20,7 +20,7 @@ const helpTopics = [
 
 export default function HelpCenterPage() {
   return (
-    <div className="page-shell py-10 sm:py-14">
+    <div className="page-shell flex min-h-[70vh] flex-col py-10 sm:py-14">
       <section className="glass-card rounded-[2.4rem] p-6 sm:p-8 lg:p-10">
         <span className="eyebrow">Help center</span>
         <h1 className="section-title mt-5 max-w-3xl">
@@ -47,7 +47,7 @@ export default function HelpCenterPage() {
         </div>
       </section>
 
-      <section className="mt-8 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="mt-8 grid flex-1 gap-5 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="glass-card rounded-[2rem] p-6 sm:p-8">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
             Quick answers

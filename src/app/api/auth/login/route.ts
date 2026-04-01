@@ -1,39 +1,18 @@
 import { NextResponse } from "next/server";
 import { compare } from "bcryptjs";
-import { createAdminSession, createCustomerSession } from "@/lib/auth-server";
+import { createUserSession } from "@/lib/auth-server";
 import { getPrisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   const body = (await request.json()) as {
-    role?: "customer" | "admin";
     email?: string;
     password?: string;
   };
 
-  const role = body.role ?? "customer";
-
-  if (role === "admin") {
-    const expectedPassword = process.env.ADMIN_PASSWORD ?? "admin123";
-
-    if (!body.password || body.password !== expectedPassword) {
-      return NextResponse.json({ error: "Invalid password" }, { status: 401 });
-    }
-
-    await createAdminSession();
-    return NextResponse.json({
-      user: {
-        id: "admin",
-        name: "Store Admin",
-        email: "admin@sokokenya.co.ke",
-        role: "admin",
-      },
-    });
-  }
-
   const prisma = await getPrisma();
   if (!prisma?.user?.findUnique) {
     return NextResponse.json(
-      { error: "Database connection is required for customer login." },
+      { error: "Database connection is required for login." },
       { status: 500 },
     );
   }
@@ -65,14 +44,14 @@ export async function POST(request: Request) {
     );
   }
 
-  await createCustomerSession(user);
+  await createUserSession(user);
 
   return NextResponse.json({
     user: {
       id: user.id,
       name: user.name,
       email: user.email,
-      role: "customer",
+      role: user.role === "admin" ? "admin" : "customer",
     },
   });
 }

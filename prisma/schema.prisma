@@ -48,6 +48,7 @@ model Order {
   total         Float
   status        String        @default("pending")
   paymentStatus String        @default("pending")
+  paymentMethod String        @default("mpesa")
   mpesaReceipt  String?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt

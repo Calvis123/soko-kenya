@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { requireAdminUser } from "@/lib/auth-server";
 import { getPrisma } from "@/lib/prisma";
 import { getCategories } from "@/lib/store";
 import type { CategoryFormInput } from "@/lib/types";
@@ -10,6 +11,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const adminUser = await requireAdminUser();
+  if (!adminUser) {
+    return NextResponse.json({ error: "Admin login required." }, { status: 401 });
+  }
+
   const prisma = await getPrisma();
   if (!prisma) {
     return NextResponse.json(

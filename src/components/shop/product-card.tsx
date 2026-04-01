@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { ShoppingBag, Star } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/auth-provider";
@@ -9,7 +8,13 @@ import { useCart } from "@/components/cart/cart-provider";
 import type { Product } from "@/lib/types";
 import { formatCurrency } from "@/lib/utils";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({
+  product,
+  compact = false,
+}: {
+  product: Product;
+  compact?: boolean;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const { isLoggedIn } = useAuth();
@@ -18,10 +23,22 @@ export function ProductCard({ product }: { product: Product }) {
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(" ");
+  const productHref = `/product/${product.slug}`;
 
   return (
-    <article className="glass-card group flex h-full flex-col overflow-hidden rounded-[2rem] border border-transparent bg-[var(--product-card-bg)] transition duration-300 hover:-translate-y-1 hover:border-[var(--line)]">
-      <div className="relative h-52 overflow-hidden sm:h-56">
+    <article
+      role="link"
+      tabIndex={0}
+      onClick={() => router.push(productHref)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          router.push(productHref);
+        }
+      }}
+      className="glass-card group flex h-full cursor-pointer flex-col overflow-hidden rounded-[2rem] border border-transparent bg-[var(--product-card-bg)] transition duration-300 hover:-translate-y-1 hover:border-[var(--line)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]"
+    >
+      <div className={`relative overflow-hidden ${compact ? "h-44" : "h-52 sm:h-56"}`}>
         <Image
           src={product.images[0]}
           alt={product.name}
@@ -41,10 +58,15 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           ))}
         </div>
+        {product.images.length > 1 ? (
+          <div className="absolute bottom-4 right-4 rounded-full bg-black/55 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+            +{product.images.length - 1} more
+          </div>
+        ) : null}
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className={`flex flex-1 flex-col ${compact ? "p-4" : "p-5"}`}>
         <div className="mb-3 flex items-center justify-between gap-3">
-          <span className="rounded-full bg-[rgba(188,90,43,0.12)] px-3 py-1 text-xs font-semibold text-[var(--brand-dark)]">
+          <span className="rounded-full bg-[var(--product-chip-bg)] px-3 py-1 text-xs font-semibold text-[var(--brand-dark)]">
             {categoryLabel}
           </span>
           <span className="flex items-center gap-1 text-sm text-[var(--muted)]">
@@ -52,13 +74,10 @@ export function ProductCard({ product }: { product: Product }) {
             {product.rating}
           </span>
         </div>
-        <Link
-          href={`/product/${product.slug}`}
-          className="font-mono text-xl font-semibold tracking-tight"
-        >
+        <p className={`font-semibold tracking-tight ${compact ? "text-base" : "text-xl"}`}>
           {product.name}
-        </Link>
-        <p className="mt-3 line-clamp-2 flex-1 text-sm leading-6 text-[var(--muted)]">
+        </p>
+        <p className={`mt-3 flex-1 text-sm leading-6 text-[var(--muted)] ${compact ? "line-clamp-2" : "line-clamp-2"}`}>
           {product.description}
         </p>
         <div className="mt-4 flex items-center justify-between text-sm text-[var(--muted)]">
@@ -74,9 +93,14 @@ export function ProductCard({ product }: { product: Product }) {
               {formatCurrency(product.price)}
             </p>
           </div>
-          <button
+          <div className="flex items-center gap-2">
+            <span className="hidden text-xs font-semibold uppercase tracking-[0.16em] text-[var(--muted)] sm:inline">
+              View details
+            </span>
+            <button
             type="button"
-            onClick={() => {
+            onClick={(event) => {
+              event.stopPropagation();
               if (!isLoggedIn) {
                 router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
                 return;
@@ -87,8 +111,9 @@ export function ProductCard({ product }: { product: Product }) {
             className="inline-flex items-center gap-2 rounded-full bg-[var(--cta-solid)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[var(--cta-solid-hover)] hover:text-white"
           >
             <ShoppingBag size={16} />
-            Add to cart
-          </button>
+              {compact ? "Add" : "Add to cart"}
+            </button>
+          </div>
         </div>
       </div>
     </article>

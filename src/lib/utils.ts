@@ -29,3 +29,21 @@ export function formatPhoneForMpesa(phone: string) {
   }
   return cleaned;
 }
+
+export function normalizePhoneForLookup(phone: string) {
+  const cleaned = phone.replace(/\D/g, "");
+
+  if (cleaned.length === 0) {
+    return "";
+  }
+
+  if (cleaned.startsWith("254")) {
+    return cleaned.slice(-9);
+  }
+
+  if (cleaned.startsWith("0")) {
+    return cleaned.slice(-9);
+  }
+
+  return cleaned.slice(-9);
+}

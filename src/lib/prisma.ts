@@ -12,17 +12,25 @@ export async function getPrisma() {
     return null;
   }
 
-  if (!global.prisma) {
-    const adapter = new PrismaPg({
-      connectionString: process.env.DATABASE_URL,
-    });
+  const shouldCache = process.env.NODE_ENV !== "development";
 
-    global.prisma = new PrismaClient({
-      adapter,
-      log:
-        process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
-    });
+  if (shouldCache && global.prisma) {
+    return global.prisma;
   }
 
-  return global.prisma;
+  const adapter = new PrismaPg({
+    connectionString: process.env.DATABASE_URL,
+  });
+
+  const client = new PrismaClient({
+    adapter,
+    log:
+      process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
+  });
+
+  if (shouldCache) {
+    global.prisma = client;
+  }
+
+  return client;
 }

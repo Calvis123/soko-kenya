@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { requireAdminUser } from "@/lib/auth-server";
 import { getPrisma } from "@/lib/prisma";
 import type { OrderUpdateInput } from "@/lib/types";
 
@@ -6,6 +7,11 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const adminUser = await requireAdminUser();
+  if (!adminUser) {
+    return NextResponse.json({ error: "Admin login required." }, { status: 401 });
+  }
+
   const prisma = await getPrisma();
   if (!prisma?.order?.update) {
     return NextResponse.json(

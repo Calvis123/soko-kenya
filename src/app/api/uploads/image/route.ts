@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { requireAdminUser } from "@/lib/auth-server";
 
 export async function POST(request: Request) {
+  const adminUser = await requireAdminUser();
+  if (!adminUser) {
+    return NextResponse.json({ error: "Admin login required." }, { status: 401 });
+  }
+
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
   const apiKey = process.env.CLOUDINARY_API_KEY;
   const apiSecret = process.env.CLOUDINARY_API_SECRET;

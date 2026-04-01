@@ -1,6 +1,7 @@
 import { categories, orders, products } from "@/lib/data";
 import { getPrisma } from "@/lib/prisma";
 import type { Order, Product } from "@/lib/types";
+import { normalizePhoneForLookup } from "@/lib/utils";
 
 type DbCategory = {
   name: string;
@@ -33,6 +34,7 @@ type DbOrderItem = {
 
 type DbOrder = {
   id: string;
+  userId?: string | null;
   customerName: string;
   customerPhone: string;
   customerEmail: string | null;
@@ -40,6 +42,7 @@ type DbOrder = {
   total: number;
   status: string;
   paymentStatus: string;
+  paymentMethod: string | null;
   mpesaReceipt: string | null;
   createdAt: Date;
   items: DbOrderItem[];
@@ -72,6 +75,7 @@ function mapOrder(order: DbOrder): Order {
     total: order.total,
     status: order.status as Order["status"],
     paymentStatus: order.paymentStatus as Order["paymentStatus"],
+    paymentMethod: (order.paymentMethod as Order["paymentMethod"]) ?? "mpesa",
     mpesaReceipt: order.mpesaReceipt ?? undefined,
     createdAt: order.createdAt.toISOString(),
     items: order.items.map((item) => ({
@@ -185,5 +189,36 @@ export async function getOrderById(id: string) {
 
 export async function getOrdersByPhone(phone: string) {
   const allOrders = await getOrders();
-  return allOrders.filter((order) => order.customerPhone.includes(phone));
+  const normalizedPhone = normalizePhoneForLookup(phone);
+
+  return allOrders.filter(
+    (order) =>
+      normalizePhoneForLookup(order.customerPhone) === normalizedPhone,
+  );
+}
+
+export async function getOrdersByUserId(userId: string) {
+  const prisma = await getPrisma();
+
+  if (prisma?.order?.findMany) {
+    const dbOrders = (await prisma.order.findMany({
+      where: { userId },
+      include: {
+        items: {
+          include: {
+            product: {
+              select: { name: true },
+            },
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    })) as DbOrder[];
+
+    if (dbOrders.length > 0) {
+      return dbOrders.map(mapOrder);
+    }
+  }
+
+  return [];
 }

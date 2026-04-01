@@ -32,6 +32,7 @@ export type CartItem = {
 
 export type OrderStatus = "pending" | "processing" | "shipped" | "delivered";
 export type PaymentStatus = "pending" | "paid" | "failed";
+export type PaymentMethod = "mpesa" | "pay_on_pickup";
 
 export type Order = {
   id: string;
@@ -42,6 +43,7 @@ export type Order = {
   total: number;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
+  paymentMethod: PaymentMethod;
   mpesaReceipt?: string;
   createdAt: string;
   items: Array<{
@@ -58,6 +60,7 @@ export type CheckoutPayload = {
   customerEmail?: string;
   address: string;
   notes?: string;
+  paymentMethod: PaymentMethod;
   items: CartItem[];
 };
 

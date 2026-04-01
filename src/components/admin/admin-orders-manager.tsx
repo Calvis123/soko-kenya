@@ -154,6 +154,12 @@ export function AdminOrdersManager({ initialOrders }: { initialOrders: Order[] }
 
           <div className="mt-5 grid gap-3 text-sm text-[var(--muted)] md:grid-cols-3">
             <p>
+              Method:{" "}
+              <span className="font-semibold capitalize text-[var(--foreground)]">
+                {order.paymentMethod === "pay_on_pickup" ? "Pay on pickup" : "M-Pesa"}
+              </span>
+            </p>
+            <p>
               Status:{" "}
               <span className="font-semibold capitalize text-[var(--foreground)]">
                 {order.status}
@@ -165,13 +171,18 @@ export function AdminOrdersManager({ initialOrders }: { initialOrders: Order[] }
                 {order.paymentStatus}
               </span>
             </p>
-            <p>
+            <p className="md:col-span-2">
               Address:{" "}
               <span className="font-semibold text-[var(--foreground)]">
                 {order.address}
               </span>
             </p>
           </div>
+          {order.paymentMethod === "pay_on_pickup" && order.paymentStatus !== "paid" ? (
+            <div className="mt-4 rounded-[1.3rem] bg-[rgba(188,90,43,0.12)] px-4 py-3 text-sm leading-7 text-[var(--brand-dark)]">
+              Hold release until the customer completes payment at pickup.
+            </div>
+          ) : null}
         </article>
       ))}
     </div>

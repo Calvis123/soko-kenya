@@ -17,18 +17,6 @@ const ADMIN_SESSION_COOKIE = "admin-session";
 
 export async function getCurrentUser(): Promise<SessionUser | null> {
   const cookieStore = await cookies();
-  const adminSession = cookieStore.get(ADMIN_SESSION_COOKIE)?.value;
-
-  if (adminSession === "active") {
-    return {
-      id: "admin",
-      name: cookieStore.get(SESSION_NAME_COOKIE)?.value ?? "Store Admin",
-      email:
-        cookieStore.get(SESSION_EMAIL_COOKIE)?.value ?? "admin@sokokenya.co.ke",
-      role: "admin",
-    };
-  }
-
   const token = cookieStore.get(SESSION_TOKEN_COOKIE)?.value;
   if (!token) {
     return null;
@@ -54,18 +42,29 @@ export async function getCurrentUser(): Promise<SessionUser | null> {
     id: session.user.id,
     name: session.user.name,
     email: session.user.email,
-    role: "customer",
+    role: session.user.role === "admin" ? "admin" : "customer",
   };
 }
 
-export async function createCustomerSession(user: {
+export async function requireAdminUser() {
+  const user = await getCurrentUser();
+  return user?.role === "admin" ? user : null;
+}
+
+export async function requireCustomerUser() {
+  const user = await getCurrentUser();
+  return user?.role === "customer" ? user : null;
+}
+
+export async function createUserSession(user: {
   id: string;
   name: string;
   email: string;
+  role?: string;
 }) {
   const prisma = await getPrisma();
   if (!prisma?.session?.create) {
-    throw new Error("Database connection is required for customer sessions.");
+    throw new Error("Database connection is required for user sessions.");
   }
 
   const token = randomUUID();
@@ -85,62 +84,24 @@ export async function createCustomerSession(user: {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    expires: expiresAt,
   });
-  cookieStore.set(SESSION_ROLE_COOKIE, "customer", {
+  cookieStore.set(SESSION_ROLE_COOKIE, user.role === "admin" ? "admin" : "customer", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    expires: expiresAt,
   });
   cookieStore.set(SESSION_NAME_COOKIE, user.name, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    expires: expiresAt,
   });
   cookieStore.set(SESSION_EMAIL_COOKIE, user.email, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    expires: expiresAt,
-  });
-}
-
-export async function createAdminSession() {
-  const cookieStore = await cookies();
-  const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
-
-  cookieStore.set(ADMIN_SESSION_COOKIE, "active", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    expires: expiresAt,
-  });
-  cookieStore.set(SESSION_ROLE_COOKIE, "admin", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    expires: expiresAt,
-  });
-  cookieStore.set(SESSION_NAME_COOKIE, "Store Admin", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    expires: expiresAt,
-  });
-  cookieStore.set(SESSION_EMAIL_COOKIE, "admin@sokokenya.co.ke", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    expires: expiresAt,
   });
 }
 

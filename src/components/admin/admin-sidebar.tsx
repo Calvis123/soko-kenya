@@ -80,18 +80,21 @@ export function AdminSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center justify-between rounded-[1.5rem] border px-4 py-4 transition",
+                "relative flex items-center justify-between overflow-hidden rounded-[1.5rem] border px-4 py-4 transition duration-300",
                 active
-                  ? "border-transparent bg-[var(--admin-sidebar-active)] text-white shadow-[0_18px_40px_rgba(0,0,0,0.26)]"
+                  ? "border-[var(--admin-sidebar-active-border)] bg-[var(--admin-sidebar-active)] text-[var(--admin-sidebar-active-text)] shadow-[0_22px_46px_rgba(0,0,0,0.18)]"
                   : "border-[var(--line)] bg-[var(--admin-sidebar-link)] hover:bg-[var(--admin-sidebar-link-hover)]",
               )}
             >
+              {active ? (
+                <span className="absolute bottom-3 left-2 top-3 w-1 rounded-full bg-[linear-gradient(180deg,var(--brand),var(--brand-dark))]" />
+              ) : null}
               <div className="flex items-center gap-3">
                 <div
                   className={cn(
-                    "flex h-11 w-11 items-center justify-center rounded-2xl",
+                    "flex h-11 w-11 items-center justify-center rounded-2xl transition",
                     active
-                      ? "bg-white/12"
+                      ? "bg-[var(--admin-sidebar-active-icon)] text-[var(--admin-sidebar-active-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
                       : "bg-[rgba(188,90,43,0.12)] text-[var(--brand-dark)]",
                   )}
                 >

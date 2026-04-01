@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { requireAdminUser } from "@/lib/auth-server";
 import { getPrisma } from "@/lib/prisma";
 import type { ProductFormInput } from "@/lib/types";
 import { slugify } from "@/lib/admin-utils";
@@ -7,6 +8,11 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const adminUser = await requireAdminUser();
+  if (!adminUser) {
+    return NextResponse.json({ error: "Admin login required." }, { status: 401 });
+  }
+
   const prisma = await getPrisma();
   if (!prisma) {
     return NextResponse.json(
@@ -54,6 +60,11 @@ export async function DELETE(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const adminUser = await requireAdminUser();
+  if (!adminUser) {
+    return NextResponse.json({ error: "Admin login required." }, { status: 401 });
+  }
+
   const prisma = await getPrisma();
   if (!prisma) {
     return NextResponse.json(

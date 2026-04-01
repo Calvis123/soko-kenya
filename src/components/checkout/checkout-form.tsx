@@ -3,7 +3,7 @@
 import { startTransition, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/cart-provider";
-import type { CheckoutPayload } from "@/lib/types";
+import type { CheckoutPayload, PaymentMethod } from "@/lib/types";
 import { formatCurrency } from "@/lib/utils";
 
 export function CheckoutForm() {
@@ -11,6 +11,7 @@ export function CheckoutForm() {
   const { items, subtotal, clearCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("mpesa");
   const deliveryFee = 350;
 
   async function handleSubmit(formData: FormData) {
@@ -28,6 +29,9 @@ export function CheckoutForm() {
       customerEmail: String(formData.get("customerEmail") ?? ""),
       address: String(formData.get("address") ?? ""),
       notes: String(formData.get("notes") ?? ""),
+      paymentMethod: String(
+        formData.get("paymentMethod") ?? "mpesa",
+      ) as PaymentMethod,
       items,
     };
 
@@ -40,22 +44,36 @@ export function CheckoutForm() {
         body: JSON.stringify(payload),
       });
 
+      const data = (await response.json()) as { orderId?: string; error?: string };
+
       if (!response.ok) {
-        throw new Error("Unable to create the order.");
+        if (response.status === 401) {
+          throw new Error(
+            data.error ?? "Your session has expired. Please log in again before checkout.",
+          );
+        }
+
+        throw new Error(data.error ?? "Unable to create the order.");
       }
 
-      const data = (await response.json()) as { orderId: string };
       clearCart();
 
       startTransition(() => {
         router.push(`/order-confirmation/${data.orderId}`);
       });
     } catch (submissionError) {
-      setError(
+      const message =
         submissionError instanceof Error
           ? submissionError.message
-          : "Checkout failed. Please try again.",
-      );
+          : "Checkout failed. Please try again.";
+
+      setError(message);
+
+      if (message.toLowerCase().includes("log in again")) {
+        startTransition(() => {
+          router.push("/login");
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -113,6 +131,52 @@ export function CheckoutForm() {
               className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white/70 px-4 py-3 outline-none"
             />
           </label>
+          <div className="sm:col-span-2">
+            <span className="text-sm font-medium">Payment option</span>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <label
+                className={`cursor-pointer rounded-[1.5rem] border p-4 transition ${
+                  paymentMethod === "mpesa"
+                    ? "border-[var(--brand)] bg-[rgba(188,90,43,0.1)] shadow-[0_14px_30px_rgba(188,90,43,0.12)]"
+                    : "border-[var(--line)] bg-[var(--surface-soft)] hover:bg-[var(--surface-soft-hover)]"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="mpesa"
+                  checked={paymentMethod === "mpesa"}
+                  onChange={() => setPaymentMethod("mpesa")}
+                  className="sr-only"
+                />
+                <p className="font-semibold">Pay with M-Pesa</p>
+                <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                  Place the order and trigger M-Pesa checkout immediately.
+                </p>
+              </label>
+              <label
+                className={`cursor-pointer rounded-[1.5rem] border p-4 transition ${
+                  paymentMethod === "pay_on_pickup"
+                    ? "border-[var(--brand)] bg-[rgba(188,90,43,0.1)] shadow-[0_14px_30px_rgba(188,90,43,0.12)]"
+                    : "border-[var(--line)] bg-[var(--surface-soft)] hover:bg-[var(--surface-soft-hover)]"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="pay_on_pickup"
+                  checked={paymentMethod === "pay_on_pickup"}
+                  onChange={() => setPaymentMethod("pay_on_pickup")}
+                  className="sr-only"
+                />
+                <p className="font-semibold">Pay on pickup</p>
+                <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                  Your order is placed now, but goods stay unreleased until
+                  payment is completed at pickup.
+                </p>
+              </label>
+            </div>
+          </div>
         </div>
 
         {error ? (
@@ -126,7 +190,11 @@ export function CheckoutForm() {
           disabled={loading}
           className="mt-8 inline-flex rounded-full bg-[var(--brand)] px-6 py-4 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {loading ? "Placing order..." : "Place order"}
+          {loading
+            ? "Placing order..."
+            : paymentMethod === "pay_on_pickup"
+              ? "Place pickup order"
+              : "Place order"}
         </button>
       </form>
 
@@ -164,8 +232,9 @@ export function CheckoutForm() {
         </div>
 
         <div className="mt-6 rounded-[1.5rem] bg-[rgba(31,107,87,0.11)] p-4 text-sm leading-7 text-[var(--foreground)]">
-          M-Pesa note: the backend route includes mock STK push scaffolding. Add
-          your Daraja credentials in `.env` to connect real payments next.
+          {paymentMethod === "mpesa"
+            ? "M-Pesa note: the backend route includes mock STK push scaffolding. Add your Daraja credentials in `.env` to connect real payments next."
+            : "Pickup note: the order will be created with payment pending. Release should only happen after the customer completes payment at pickup."}
         </div>
       </aside>
     </div>

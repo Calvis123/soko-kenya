@@ -1,28 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6efe4;
-  --foreground: #1b1a17;
-  --muted: #735f48;
-  --card: rgba(255, 251, 245, 0.76);
-  --card-strong: #fffaf1;
-  --line: rgba(68, 52, 33, 0.14);
-  --brand: #bc5a2b;
-  --brand-dark: #913f1b;
-  --accent: #1f6b57;
-  --accent-strong: #1f6b57;
-  --shadow: 0 20px 60px rgba(52, 33, 11, 0.09);
-  --header-bg: rgba(246, 239, 228, 0.88);
-  --nav-pill: rgba(255, 251, 245, 0.72);
-  --nav-pill-shadow: 0 10px 26px rgba(52, 33, 11, 0.06);
-  --surface-elevated: rgba(255, 251, 245, 0.9);
-  --surface-soft: rgba(255, 251, 245, 0.72);
-  --surface-soft-hover: rgba(255, 255, 255, 0.92);
-  --search-shell: rgba(255, 251, 245, 0.94);
-  --search-input: rgba(255, 255, 255, 0.9);
-  --search-border: rgba(27, 26, 23, 0.12);
-  --search-ring: rgba(188, 90, 43, 0.18);
-  --search-icon-bg: rgba(188, 90, 43, 0.12);
+  --background: #f3f8fd;
+  --foreground: #16222d;
+  --muted: #5b6f82;
+  --card: rgba(249, 252, 255, 0.82);
+  --card-strong: #ffffff;
+  --line: rgba(35, 63, 91, 0.14);
+  --brand: #2563eb;
+  --brand-dark: #0f4fd6;
+  --accent: #0ea5c6;
+  --accent-strong:
+    radial-gradient(circle at top left, rgba(163, 224, 255, 0.34), transparent 34%),
+    linear-gradient(145deg, #0f3d77 0%, #1761ac 34%, #1f8ed3 70%, #73d0f4 100%);
+  --shadow: 0 22px 60px rgba(25, 56, 90, 0.1);
+  --header-bg: rgba(243, 248, 253, 0.92);
+  --promo-strip:
+    linear-gradient(90deg, rgba(232, 244, 255, 0.98) 0%, rgba(212, 234, 255, 0.98) 48%, rgba(236, 247, 255, 0.98) 100%);
+  --nav-pill: rgba(255, 255, 255, 0.94);
+  --nav-pill-shadow: 0 12px 28px rgba(25, 56, 90, 0.07);
+  --surface-elevated: rgba(255, 255, 255, 0.97);
+  --surface-soft: rgba(240, 247, 255, 0.94);
+  --surface-soft-hover: rgba(255, 255, 255, 0.98);
+  --search-shell: rgba(245, 250, 255, 0.96);
+  --search-input: rgba(255, 255, 255, 0.98);
+  --search-border: rgba(35, 63, 91, 0.12);
+  --search-ring: rgba(37, 99, 235, 0.16);
+  --search-icon-bg: rgba(37, 99, 235, 0.12);
+  --promo-panel:
+    radial-gradient(circle at top right, rgba(159, 215, 255, 0.34), transparent 32%),
+    linear-gradient(145deg, rgba(247, 251, 255, 0.99) 0%, rgba(232, 244, 255, 0.99) 52%, rgba(214, 235, 252, 0.99) 100%);
+  --editorial-bg:
+    radial-gradient(circle at top left, rgba(185, 226, 255, 0.56), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(109, 185, 255, 0.18), transparent 30%),
+    linear-gradient(145deg, rgba(250, 253, 255, 0.99) 0%, rgba(235, 245, 255, 0.99) 42%, rgba(215, 234, 250, 0.99) 100%);
+  --footer-bg: rgba(238, 246, 255, 0.94);
   --auth-hero-bg:
     linear-gradient(145deg, rgba(255, 249, 241, 0.98) 0%, rgba(249, 233, 217, 0.98) 36%, rgba(238, 203, 171, 0.98) 100%);
   --auth-hero-border: rgba(146, 93, 45, 0.18);
@@ -40,17 +52,18 @@
   --auth-muted-card: rgba(255, 255, 255, 0.46);
   --auth-pill-bg: rgba(255, 250, 242, 0.96);
   --auth-panel-shadow: 0 28px 70px rgba(52, 33, 11, 0.12);
-  --product-card-bg: rgba(255, 251, 245, 0.82);
+  --product-card-bg: rgba(255, 252, 248, 0.9);
   --product-tag-bg: rgba(255, 255, 255, 0.9);
   --product-tag-text: #1b1a17;
   --product-tag-shadow: 0 8px 20px rgba(52, 33, 11, 0.1);
   --product-tag-border: rgba(27, 26, 23, 0.14);
-  --cta-solid: #1b1a17;
-  --cta-solid-hover: #312c27;
-  --hero-orb-a: rgba(31, 107, 87, 0.12);
-  --hero-orb-b: rgba(188, 90, 43, 0.12);
-  --eyebrow-border: rgba(145, 63, 27, 0.18);
-  --eyebrow-bg: rgba(255, 250, 241, 0.74);
+  --product-chip-bg: rgba(37, 99, 235, 0.12);
+  --cta-solid: #16222d;
+  --cta-solid-hover: #22364a;
+  --hero-orb-a: rgba(78, 151, 255, 0.28);
+  --hero-orb-b: rgba(14, 165, 198, 0.24);
+  --eyebrow-border: rgba(37, 99, 235, 0.18);
+  --eyebrow-bg: rgba(240, 247, 255, 0.86);
   --admin-shell-bg:
     radial-gradient(circle at top left, rgba(188, 90, 43, 0.12), transparent 24%),
     radial-gradient(circle at bottom right, rgba(31, 107, 87, 0.12), transparent 22%);
@@ -58,8 +71,11 @@
   --admin-sidebar-panel: rgba(255, 250, 241, 0.9);
   --admin-sidebar-link: rgba(255, 255, 255, 0.42);
   --admin-sidebar-link-hover: rgba(255, 255, 255, 0.72);
-  --admin-sidebar-active: #1b1a17;
-  --admin-sidebar-active-muted: rgba(255, 255, 255, 0.72);
+  --admin-sidebar-active: linear-gradient(145deg, rgba(255, 252, 247, 0.99) 0%, rgba(252, 235, 218, 0.99) 44%, rgba(242, 201, 169, 0.99) 100%);
+  --admin-sidebar-active-border: rgba(145, 63, 27, 0.32);
+  --admin-sidebar-active-text: #26170f;
+  --admin-sidebar-active-muted: rgba(84, 54, 34, 0.86);
+  --admin-sidebar-active-icon: linear-gradient(145deg, rgba(188, 90, 43, 0.18), rgba(145, 63, 27, 0.26));
   --admin-hero-bg: linear-gradient(145deg, rgba(255, 251, 245, 0.9), rgba(255, 247, 237, 0.72));
   --admin-input-bg: rgba(255, 255, 255, 1);
   --admin-input-border: rgba(68, 52, 33, 0.18);
@@ -70,18 +86,22 @@
 }
 
 :root[data-theme="dark"] {
-  --background: #0f1418;
-  --foreground: #f5efe6;
-  --muted: #b9aa96;
+  --background: #0a121b;
+  --foreground: #edf6ff;
+  --muted: #9bb0c3;
   --card: rgba(22, 29, 35, 0.82);
   --card-strong: #161f25;
   --line: rgba(224, 210, 191, 0.12);
-  --brand: #d87843;
-  --brand-dark: #f0a16f;
-  --accent: #236d63;
-  --accent-strong: #2b8477;
+  --brand: #5aa7ff;
+  --brand-dark: #8cc8ff;
+  --accent: #22c1d6;
+  --accent-strong:
+    radial-gradient(circle at top left, rgba(132, 200, 255, 0.14), transparent 30%),
+    linear-gradient(145deg, #0b2341 0%, #113a69 34%, #17639a 72%, #1aa4ca 100%);
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
   --header-bg: rgba(10, 14, 18, 0.88);
+  --promo-strip:
+    linear-gradient(90deg, rgba(10, 27, 49, 0.97) 0%, rgba(15, 48, 82, 0.97) 50%, rgba(10, 27, 49, 0.97) 100%);
   --nav-pill: rgba(28, 37, 45, 0.92);
   --nav-pill-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
   --surface-elevated: rgba(26, 35, 43, 0.96);
@@ -90,8 +110,16 @@
   --search-shell: rgba(20, 28, 34, 0.96);
   --search-input: rgba(28, 38, 46, 0.96);
   --search-border: rgba(245, 239, 230, 0.1);
-  --search-ring: rgba(216, 120, 67, 0.22);
-  --search-icon-bg: rgba(216, 120, 67, 0.14);
+  --search-ring: rgba(90, 167, 255, 0.22);
+  --search-icon-bg: rgba(90, 167, 255, 0.14);
+  --promo-panel:
+    radial-gradient(circle at top right, rgba(90, 167, 255, 0.14), transparent 28%),
+    linear-gradient(145deg, rgba(11, 20, 31, 0.99) 0%, rgba(15, 31, 48, 0.99) 52%, rgba(16, 43, 67, 0.99) 100%);
+  --editorial-bg:
+    radial-gradient(circle at top left, rgba(90, 167, 255, 0.18), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(34, 193, 214, 0.12), transparent 24%),
+    linear-gradient(145deg, rgba(10, 18, 28, 0.99) 0%, rgba(16, 31, 46, 0.99) 46%, rgba(18, 47, 70, 0.99) 100%);
+  --footer-bg: rgba(12, 19, 29, 0.94);
   --auth-hero-bg: linear-gradient(145deg, #10161b 0%, #8f4620 42%, #d87843 100%);
   --auth-hero-border: rgba(240, 161, 111, 0.12);
   --auth-hero-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
@@ -111,11 +139,12 @@
   --product-tag-text: #f5efe6;
   --product-tag-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
   --product-tag-border: rgba(245, 239, 230, 0.12);
-  --cta-solid: #d87843;
-  --cta-solid-hover: #f0a16f;
-  --hero-orb-a: rgba(43, 132, 119, 0.28);
-  --hero-orb-b: rgba(216, 120, 67, 0.3);
-  --eyebrow-border: rgba(240, 161, 111, 0.22);
+  --product-chip-bg: rgba(90, 167, 255, 0.18);
+  --cta-solid: #5aa7ff;
+  --cta-solid-hover: #8cc8ff;
+  --hero-orb-a: rgba(90, 167, 255, 0.32);
+  --hero-orb-b: rgba(34, 193, 214, 0.28);
+  --eyebrow-border: rgba(90, 167, 255, 0.22);
   --eyebrow-bg: rgba(31, 40, 48, 0.92);
   --admin-shell-bg:
     radial-gradient(circle at top left, rgba(216, 120, 67, 0.3), transparent 20%),
@@ -125,8 +154,11 @@
   --admin-sidebar-panel: rgba(25, 35, 42, 0.98);
   --admin-sidebar-link: rgba(29, 40, 48, 0.98);
   --admin-sidebar-link-hover: rgba(42, 57, 68, 0.98);
-  --admin-sidebar-active: linear-gradient(145deg, rgba(27, 38, 46, 1), rgba(54, 73, 86, 0.98));
-  --admin-sidebar-active-muted: rgba(245, 239, 230, 0.78);
+  --admin-sidebar-active: linear-gradient(145deg, rgba(14, 21, 27, 1) 0%, rgba(30, 48, 59, 0.98) 34%, rgba(114, 60, 30, 0.98) 72%, rgba(216, 120, 67, 0.96) 100%);
+  --admin-sidebar-active-border: rgba(240, 161, 111, 0.28);
+  --admin-sidebar-active-text: #fff8f0;
+  --admin-sidebar-active-muted: rgba(255, 241, 227, 0.84);
+  --admin-sidebar-active-icon: rgba(255, 255, 255, 0.14);
   --admin-hero-bg:
     linear-gradient(145deg, rgba(15, 21, 27, 0.99), rgba(30, 41, 49, 0.96)),
     radial-gradient(circle at top right, rgba(216, 120, 67, 0.18), transparent 24%);
@@ -157,8 +189,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
   background-image:
-    radial-gradient(circle at top left, rgba(188, 90, 43, 0.16), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(31, 107, 87, 0.14), transparent 24%);
+    radial-gradient(circle at top left, rgba(79, 149, 255, 0.14), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(34, 193, 214, 0.12), transparent 24%);
   transition:
     background-color 0.25s ease,
     color 0.25s ease,
@@ -167,8 +199,8 @@ body {
 
 :root[data-theme="dark"] body {
   background-image:
-    radial-gradient(circle at top left, rgba(216, 120, 67, 0.24), transparent 22%),
-    radial-gradient(circle at bottom right, rgba(43, 132, 119, 0.2), transparent 20%);
+    radial-gradient(circle at top left, rgba(90, 167, 255, 0.24), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(34, 193, 214, 0.18), transparent 20%);
 }
 
 a {
@@ -184,7 +216,7 @@ textarea {
 }
 
 ::selection {
-  background: rgba(188, 90, 43, 0.2);
+  background: rgba(37, 99, 235, 0.22);
 }
 
 .page-shell {

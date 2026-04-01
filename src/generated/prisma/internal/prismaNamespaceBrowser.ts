@@ -119,6 +119,7 @@ export const OrderScalarFieldEnum = {
   total: 'total',
   status: 'status',
   paymentStatus: 'paymentStatus',
+  paymentMethod: 'paymentMethod',
   mpesaReceipt: 'mpesaReceipt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

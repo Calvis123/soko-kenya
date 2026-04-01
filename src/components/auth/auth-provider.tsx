@@ -3,8 +3,10 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useMemo,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -27,6 +29,20 @@ type AuthContextValue = {
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
+const TAB_AUTH_KEY = "soko-kenya-tab-auth";
+
+function subscribeToTabAuth(callback: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const handler = () => callback();
+  window.addEventListener("soko-tab-auth-change", handler);
+
+  return () => {
+    window.removeEventListener("soko-tab-auth-change", handler);
+  };
+}
 
 export function AuthProvider({
   children,
@@ -36,12 +52,60 @@ export function AuthProvider({
   initialUser: AuthUser | null;
 }) {
   const [user, setUser] = useState<AuthUser | null>(initialUser);
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const hasTabSession = useSyncExternalStore(
+    subscribeToTabAuth,
+    () => {
+      if (typeof window === "undefined") {
+        return false;
+      }
+
+      return window.sessionStorage.getItem(TAB_AUTH_KEY) === "active";
+    },
+    () => false,
+  );
+  const requiresTabSession = user?.role === "admin";
+  const effectiveUser =
+    requiresTabSession && !hasTabSession ? null : user;
+
+  useEffect(() => {
+    if (!hydrated || !user || !requiresTabSession || hasTabSession) {
+      return;
+    }
+
+    let cancelled = false;
+
+    void fetch("/api/auth/logout", {
+      method: "POST",
+    }).finally(() => {
+      if (!cancelled) {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hasTabSession, hydrated, requiresTabSession, user]);
+
   const value = useMemo<AuthContextValue>(
     () => ({
-      user,
-      hydrated: true,
-      isLoggedIn: Boolean(user),
+      user: effectiveUser,
+      hydrated,
+      isLoggedIn: Boolean(effectiveUser),
       login: (nextUser) => {
+        if (typeof window !== "undefined") {
+          if (nextUser.role === "admin") {
+            window.sessionStorage.setItem(TAB_AUTH_KEY, "active");
+          } else {
+            window.sessionStorage.removeItem(TAB_AUTH_KEY);
+          }
+          window.dispatchEvent(new Event("soko-tab-auth-change"));
+        }
         setUser(nextUser);
       },
       refreshUser: async () => {
@@ -55,10 +119,14 @@ export function AuthProvider({
         await fetch("/api/auth/logout", {
           method: "POST",
         });
+        if (typeof window !== "undefined") {
+          window.sessionStorage.removeItem(TAB_AUTH_KEY);
+          window.dispatchEvent(new Event("soko-tab-auth-change"));
+        }
         setUser(null);
       },
     }),
-    [user],
+    [effectiveUser, hydrated],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

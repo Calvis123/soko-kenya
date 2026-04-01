@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { hash } from "bcryptjs";
-import { createCustomerSession } from "@/lib/auth-server";
+import { createUserSession } from "@/lib/auth-server";
 import { getPrisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     },
   });
 
-  await createCustomerSession(user);
+  await createUserSession(user);
 
   return NextResponse.json({
     user: {

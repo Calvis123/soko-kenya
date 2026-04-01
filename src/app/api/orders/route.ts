@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
-import { getCurrentUser } from "@/lib/auth-server";
+import { getCurrentUser, requireAdminUser } from "@/lib/auth-server";
 import { initiateStkPush } from "@/lib/mpesa";
 import { getPrisma } from "@/lib/prisma";
 import type { CheckoutPayload } from "@/lib/types";
 import { formatPhoneForMpesa } from "@/lib/utils";
 
 export async function GET() {
+  const adminUser = await requireAdminUser();
+  if (!adminUser) {
+    return NextResponse.json({ error: "Admin login required." }, { status: 401 });
+  }
+
   const prisma = await getPrisma();
   const items =
     prisma?.order?.findMany
@@ -32,26 +37,40 @@ export async function POST(request: Request) {
     350,
   );
 
-  const stkPush = await initiateStkPush({
-    amount: orderTotal,
-    phoneNumber: formatPhoneForMpesa(body.customerPhone),
-    accountReference: orderId,
-    transactionDesc: `Order ${orderId}`,
-  });
+  const paymentMethod = body.paymentMethod ?? "mpesa";
+  const normalizedPhone = formatPhoneForMpesa(body.customerPhone);
+  const stkPush =
+    paymentMethod === "mpesa"
+      ? await initiateStkPush({
+          amount: orderTotal,
+          phoneNumber: normalizedPhone,
+          accountReference: orderId,
+          transactionDesc: `Order ${orderId}`,
+        })
+      : null;
 
   if (prisma?.order?.create) {
     await prisma.order.create({
       data: {
         id: orderId,
-        userId: currentUser?.role === "customer" ? currentUser.id : null,
         customerName: body.customerName,
-        customerPhone: body.customerPhone,
+        customerPhone: normalizedPhone,
         customerEmail: body.customerEmail || null,
         address: body.address,
         notes: body.notes || null,
         total: orderTotal,
         status: "pending",
         paymentStatus: "pending",
+        paymentMethod,
+        ...(currentUser?.role === "customer"
+          ? {
+              user: {
+                connect: {
+                  id: currentUser.id,
+                },
+              },
+            }
+          : {}),
         items: {
           create: body.items.map((item) => ({
             productId: item.id,
@@ -66,6 +85,7 @@ export async function POST(request: Request) {
   return NextResponse.json({
     orderId,
     total: orderTotal,
+    paymentMethod,
     payment: stkPush,
   });
 }

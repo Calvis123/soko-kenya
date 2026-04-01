@@ -300,6 +300,7 @@ export const orders: Order[] = [
     total: 8050,
     status: "processing",
     paymentStatus: "paid",
+    paymentMethod: "mpesa",
     mpesaReceipt: "RK21L0X8AB",
     createdAt: "2026-03-24T10:30:00.000Z",
     items: [
@@ -325,6 +326,7 @@ export const orders: Order[] = [
     total: 4850,
     status: "pending",
     paymentStatus: "pending",
+    paymentMethod: "pay_on_pickup",
     createdAt: "2026-03-26T08:12:00.000Z",
     items: [
       {

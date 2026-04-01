@@ -45,6 +45,7 @@ export type OrderMinAggregateOutputType = {
   total: number | null
   status: string | null
   paymentStatus: string | null
+  paymentMethod: string | null
   mpesaReceipt: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -61,6 +62,7 @@ export type OrderMaxAggregateOutputType = {
   total: number | null
   status: string | null
   paymentStatus: string | null
+  paymentMethod: string | null
   mpesaReceipt: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -77,6 +79,7 @@ export type OrderCountAggregateOutputType = {
   total: number
   status: number
   paymentStatus: number
+  paymentMethod: number
   mpesaReceipt: number
   createdAt: number
   updatedAt: number
@@ -103,6 +106,7 @@ export type OrderMinAggregateInputType = {
   total?: true
   status?: true
   paymentStatus?: true
+  paymentMethod?: true
   mpesaReceipt?: true
   createdAt?: true
   updatedAt?: true
@@ -119,6 +123,7 @@ export type OrderMaxAggregateInputType = {
   total?: true
   status?: true
   paymentStatus?: true
+  paymentMethod?: true
   mpesaReceipt?: true
   createdAt?: true
   updatedAt?: true
@@ -135,6 +140,7 @@ export type OrderCountAggregateInputType = {
   total?: true
   status?: true
   paymentStatus?: true
+  paymentMethod?: true
   mpesaReceipt?: true
   createdAt?: true
   updatedAt?: true
@@ -238,6 +244,7 @@ export type OrderGroupByOutputType = {
   total: number
   status: string
   paymentStatus: string
+  paymentMethod: string
   mpesaReceipt: string | null
   createdAt: Date
   updatedAt: Date
@@ -277,6 +284,7 @@ export type OrderWhereInput = {
   total?: Prisma.FloatFilter<"Order"> | number
   status?: Prisma.StringFilter<"Order"> | string
   paymentStatus?: Prisma.StringFilter<"Order"> | string
+  paymentMethod?: Prisma.StringFilter<"Order"> | string
   mpesaReceipt?: Prisma.StringNullableFilter<"Order"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -295,6 +303,7 @@ export type OrderOrderByWithRelationInput = {
   total?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   mpesaReceipt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -316,6 +325,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   total?: Prisma.FloatFilter<"Order"> | number
   status?: Prisma.StringFilter<"Order"> | string
   paymentStatus?: Prisma.StringFilter<"Order"> | string
+  paymentMethod?: Prisma.StringFilter<"Order"> | string
   mpesaReceipt?: Prisma.StringNullableFilter<"Order"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -334,6 +344,7 @@ export type OrderOrderByWithAggregationInput = {
   total?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   mpesaReceipt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -358,6 +369,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   total?: Prisma.FloatWithAggregatesFilter<"Order"> | number
   status?: Prisma.StringWithAggregatesFilter<"Order"> | string
   paymentStatus?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  paymentMethod?: Prisma.StringWithAggregatesFilter<"Order"> | string
   mpesaReceipt?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -373,6 +385,7 @@ export type OrderCreateInput = {
   total: number
   status?: string
   paymentStatus?: string
+  paymentMethod?: string
   mpesaReceipt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -391,6 +404,7 @@ export type OrderUncheckedCreateInput = {
   total: number
   status?: string
   paymentStatus?: string
+  paymentMethod?: string
   mpesaReceipt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -407,6 +421,7 @@ export type OrderUpdateInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -425,6 +440,7 @@ export type OrderUncheckedUpdateInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -442,6 +458,7 @@ export type OrderCreateManyInput = {
   total: number
   status?: string
   paymentStatus?: string
+  paymentMethod?: string
   mpesaReceipt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -457,6 +474,7 @@ export type OrderUpdateManyMutationInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -473,6 +491,7 @@ export type OrderUncheckedUpdateManyInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -489,6 +508,7 @@ export type OrderCountOrderByAggregateInput = {
   total?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   mpesaReceipt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -509,6 +529,7 @@ export type OrderMaxOrderByAggregateInput = {
   total?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   mpesaReceipt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -525,6 +546,7 @@ export type OrderMinOrderByAggregateInput = {
   total?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   mpesaReceipt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -619,6 +641,7 @@ export type OrderCreateWithoutItemsInput = {
   total: number
   status?: string
   paymentStatus?: string
+  paymentMethod?: string
   mpesaReceipt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -636,6 +659,7 @@ export type OrderUncheckedCreateWithoutItemsInput = {
   total: number
   status?: string
   paymentStatus?: string
+  paymentMethod?: string
   mpesaReceipt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -667,6 +691,7 @@ export type OrderUpdateWithoutItemsInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -684,6 +709,7 @@ export type OrderUncheckedUpdateWithoutItemsInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -699,6 +725,7 @@ export type OrderCreateWithoutUserInput = {
   total: number
   status?: string
   paymentStatus?: string
+  paymentMethod?: string
   mpesaReceipt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -715,6 +742,7 @@ export type OrderUncheckedCreateWithoutUserInput = {
   total: number
   status?: string
   paymentStatus?: string
+  paymentMethod?: string
   mpesaReceipt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -761,6 +789,7 @@ export type OrderScalarWhereInput = {
   total?: Prisma.FloatFilter<"Order"> | number
   status?: Prisma.StringFilter<"Order"> | string
   paymentStatus?: Prisma.StringFilter<"Order"> | string
+  paymentMethod?: Prisma.StringFilter<"Order"> | string
   mpesaReceipt?: Prisma.StringNullableFilter<"Order"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -776,6 +805,7 @@ export type OrderCreateManyUserInput = {
   total: number
   status?: string
   paymentStatus?: string
+  paymentMethod?: string
   mpesaReceipt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -791,6 +821,7 @@ export type OrderUpdateWithoutUserInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -807,6 +838,7 @@ export type OrderUncheckedUpdateWithoutUserInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -823,6 +855,7 @@ export type OrderUncheckedUpdateManyWithoutUserInput = {
   total?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   mpesaReceipt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -870,6 +903,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   total?: boolean
   status?: boolean
   paymentStatus?: boolean
+  paymentMethod?: boolean
   mpesaReceipt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -889,6 +923,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   total?: boolean
   status?: boolean
   paymentStatus?: boolean
+  paymentMethod?: boolean
   mpesaReceipt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -906,6 +941,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   total?: boolean
   status?: boolean
   paymentStatus?: boolean
+  paymentMethod?: boolean
   mpesaReceipt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -923,12 +959,13 @@ export type OrderSelectScalar = {
   total?: boolean
   status?: boolean
   paymentStatus?: boolean
+  paymentMethod?: boolean
   mpesaReceipt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "customerName" | "customerPhone" | "customerEmail" | "address" | "notes" | "total" | "status" | "paymentStatus" | "mpesaReceipt" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "customerName" | "customerPhone" | "customerEmail" | "address" | "notes" | "total" | "status" | "paymentStatus" | "paymentMethod" | "mpesaReceipt" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Order$userArgs<ExtArgs>
   items?: boolean | Prisma.Order$itemsArgs<ExtArgs>
@@ -958,6 +995,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     total: number
     status: string
     paymentStatus: string
+    paymentMethod: string
     mpesaReceipt: string | null
     createdAt: Date
     updatedAt: Date
@@ -1396,6 +1434,7 @@ export interface OrderFieldRefs {
   readonly total: Prisma.FieldRef<"Order", 'Float'>
   readonly status: Prisma.FieldRef<"Order", 'String'>
   readonly paymentStatus: Prisma.FieldRef<"Order", 'String'>
+  readonly paymentMethod: Prisma.FieldRef<"Order", 'String'>
   readonly mpesaReceipt: Prisma.FieldRef<"Order", 'String'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Order", 'DateTime'>

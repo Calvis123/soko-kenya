@@ -14,6 +14,7 @@ type CartContextValue = {
   items: CartItem[];
   itemCount: number;
   subtotal: number;
+  hydrated: boolean;
   addItem: (product: Product) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
@@ -24,27 +25,32 @@ const CartContext = createContext<CartContextValue | null>(null);
 const STORAGE_KEY = "soko-kenya-cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [hydrated, setHydrated] = useState(false);
 
+  useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (!stored) {
-      return [];
+      setHydrated(true);
+      return;
     }
 
     try {
-      return JSON.parse(stored) as CartItem[];
+      setItems(JSON.parse(stored) as CartItem[]);
     } catch {
       window.localStorage.removeItem(STORAGE_KEY);
-      return [];
+    } finally {
+      setHydrated(true);
     }
-  });
+  }, []);
 
   useEffect(() => {
+    if (!hydrated) {
+      return;
+    }
+
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+  }, [hydrated, items]);
 
   const value = useMemo(() => {
     const subtotal = items.reduce(
@@ -56,6 +62,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       items,
       itemCount: items.reduce((count, item) => count + item.quantity, 0),
       subtotal,
+      hydrated,
       addItem: (product: Product) => {
         setItems((current) => {
           const existing = current.find((item) => item.id === product.id);
@@ -100,7 +107,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       },
       clearCart: () => setItems([]),
     };
-  }, [items]);
+  }, [hydrated, items]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
