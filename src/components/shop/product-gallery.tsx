@@ -45,8 +45,8 @@ export function ProductGallery({
         ))}
       </div>
 
-      <div className="order-1 glass-card overflow-hidden rounded-[2rem] p-3 lg:order-2">
-        <div className="relative h-[360px] overflow-hidden rounded-[1.6rem] sm:h-[430px]">
+      <div className="order-1 glass-card overflow-hidden rounded-[2rem] lg:order-2">
+        <div className="relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[460px]">
           <Image
             src={activeSafeImage}
             alt={name}
@@ -54,8 +54,9 @@ export function ProductGallery({
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/12 via-transparent to-white/5" />
         </div>
-        <div className="mt-4 flex items-center justify-between gap-3 px-1">
+        <div className="flex items-center justify-between gap-3 px-5 py-4">
           <p className="text-sm text-[var(--muted)]">
             Image {activeImage + 1} of {safeImages.length}
           </p>
