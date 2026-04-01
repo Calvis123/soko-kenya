@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import {
+  FALLBACK_PRODUCT_IMAGE,
+  getSafeImageUrls,
+} from "@/lib/safe-images";
 
 export function ProductGallery({
   images,
@@ -11,7 +15,8 @@ export function ProductGallery({
   name: string;
 }) {
   const [activeImage, setActiveImage] = useState(0);
-  const safeImages = images.length > 0 ? images : ["https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80"];
+  const safeImages = getSafeImageUrls(images, FALLBACK_PRODUCT_IMAGE);
+  const activeSafeImage = safeImages[activeImage] ?? safeImages[0];
 
   return (
     <div className="grid gap-4 lg:grid-cols-[110px_minmax(0,1fr)]">
@@ -43,7 +48,7 @@ export function ProductGallery({
       <div className="order-1 glass-card overflow-hidden rounded-[2rem] p-3 lg:order-2">
         <div className="relative h-[360px] overflow-hidden rounded-[1.6rem] sm:h-[430px]">
           <Image
-            src={safeImages[activeImage]}
+            src={activeSafeImage}
             alt={name}
             fill
             className="object-cover"

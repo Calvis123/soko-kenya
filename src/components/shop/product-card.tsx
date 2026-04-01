@@ -5,6 +5,7 @@ import { ShoppingBag, Star } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/auth-provider";
 import { useCart } from "@/components/cart/cart-provider";
+import { FALLBACK_PRODUCT_IMAGE, getSafeImageUrl } from "@/lib/safe-images";
 import type { Product } from "@/lib/types";
 import { formatCurrency } from "@/lib/utils";
 
@@ -24,6 +25,7 @@ export function ProductCard({
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(" ");
   const productHref = `/product/${product.slug}`;
+  const coverImage = getSafeImageUrl(product.images[0], FALLBACK_PRODUCT_IMAGE);
 
   return (
     <article
@@ -40,7 +42,7 @@ export function ProductCard({
     >
       <div className={`relative overflow-hidden ${compact ? "h-44" : "h-52 sm:h-56"}`}>
         <Image
-          src={product.images[0]}
+          src={coverImage}
           alt={product.name}
           fill
           className="object-cover transition duration-500 group-hover:scale-105"

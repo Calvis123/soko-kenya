@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FALLBACK_CATEGORY_IMAGE, getSafeImageUrl } from "@/lib/safe-images";
 import type { Category } from "@/lib/types";
 
 export function CategoryShowcase({ categories }: { categories: Category[] }) {
@@ -39,7 +40,7 @@ export function CategoryShowcase({ categories }: { categories: Category[] }) {
           >
             <div className="relative h-72 overflow-hidden">
               <Image
-                src={category.image}
+                src={getSafeImageUrl(category.image, FALLBACK_CATEGORY_IMAGE)}
                 alt={category.name}
                 fill
                 className="object-cover transition duration-500 group-hover:scale-105"
