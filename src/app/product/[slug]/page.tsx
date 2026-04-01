@@ -6,9 +6,7 @@ import { ProductGallery } from "@/components/shop/product-gallery";
 import { getProductBySlug } from "@/lib/store";
 import { formatCurrency } from "@/lib/utils";
 
-export function generateStaticParams() {
-  return [];
-}
+export const dynamic = "force-dynamic";
 
 export default async function ProductDetailPage({
   params,
@@ -16,7 +14,13 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  let product = null;
+
+  try {
+    product = await getProductBySlug(slug);
+  } catch (error) {
+    console.error(`Failed to render product page for slug "${slug}".`, error);
+  }
 
   if (!product) {
     notFound();
