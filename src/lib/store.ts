@@ -150,24 +150,8 @@ export async function getProducts() {
 }
 
 export async function getProductBySlug(slug: string) {
-  const prisma = await getPrisma();
-
-  if (prisma?.product?.findUnique) {
-    try {
-      const dbProduct = (await prisma.product.findUnique({
-        where: { slug },
-        include: { category: true },
-      })) as DbProduct | null;
-
-      if (dbProduct) {
-        return mapProduct(dbProduct);
-      }
-    } catch (error) {
-      console.error(`Failed to load product for slug "${slug}".`, error);
-    }
-  }
-
-  return products.find((product) => product.slug === slug);
+  const allProducts = await getProducts();
+  return allProducts.find((product) => product.slug === slug);
 }
 
 export async function getOrders() {
