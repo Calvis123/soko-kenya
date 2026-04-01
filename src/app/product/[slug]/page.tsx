@@ -22,6 +22,8 @@ export default async function ProductDetailPage({
     notFound();
   }
 
+  const safeTags = product.tags.length > 0 ? product.tags : ["Featured"];
+  const safeImagesCount = product.images.length;
   const categoryLabel = product.category
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
@@ -63,7 +65,7 @@ export default async function ProductDetailPage({
                   Gallery
                 </p>
                 <p className="mt-2 text-lg font-semibold">
-                  {product.images.length} gallery images
+                  {safeImagesCount} gallery images
                 </p>
               </div>
               <div className="rounded-[1.3rem] bg-[var(--surface-soft)] p-4">
@@ -91,7 +93,7 @@ export default async function ProductDetailPage({
             <div className="flex flex-wrap items-center gap-3">
               <span className="eyebrow">{categoryLabel}</span>
               <span className="rounded-full bg-[rgba(188,90,43,0.12)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand-dark)]">
-                {product.tags[0] ?? "Top pick"}
+                {safeTags[0] ?? "Top pick"}
               </span>
             </div>
 
@@ -163,7 +165,7 @@ export default async function ProductDetailPage({
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2">
-              {product.tags.map((tag) => (
+              {safeTags.map((tag) => (
                 <span
                   key={tag}
                   className="rounded-full border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-1 text-sm"
