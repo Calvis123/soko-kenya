@@ -29,7 +29,7 @@ export function HeroSection({ categories, products }: Props) {
   return (
     <section className="page-shell py-8 lg:py-10">
       <div className="grid gap-5 lg:grid-cols-[minmax(0,1.4fr)_360px]">
-        <div className="glass-card rise-in relative overflow-hidden rounded-[2.6rem] p-6 before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,255,255,0.18),transparent_34%,rgba(37,99,235,0.12)_100%)] before:content-[''] sm:p-8 lg:p-10">
+        <div className="glass-card rise-in relative overflow-hidden rounded-[2.6rem] p-6 before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,255,255,0.12),transparent_32%,rgba(37,99,235,0.18)_100%)] before:content-[''] sm:p-8 lg:p-10">
           <Image
             src="https://images.pexels.com/photos/32755775/pexels-photo-32755775.jpeg"
             alt="Laptop workspace hero background"
@@ -38,8 +38,8 @@ export function HeroSection({ categories, products }: Props) {
             className="object-cover object-center"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(94deg,rgba(8,20,34,0.8)_0%,rgba(11,31,52,0.7)_24%,rgba(16,54,79,0.44)_48%,rgba(27,86,117,0.2)_70%,rgba(255,255,255,0.06)_100%)] dark:bg-[linear-gradient(92deg,rgba(8,18,30,0.92)_0%,rgba(9,29,49,0.84)_26%,rgba(13,51,77,0.6)_52%,rgba(20,91,124,0.3)_72%,rgba(255,255,255,0.08)_100%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(153,223,255,0.18),transparent_24%),radial-gradient(circle_at_bottom_left,rgba(83,194,255,0.22),transparent_28%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(90,167,255,0.24),transparent_26%),radial-gradient(circle_at_bottom_left,rgba(34,193,214,0.18),transparent_28%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(94deg,rgba(6,18,31,0.86)_0%,rgba(10,29,49,0.76)_24%,rgba(15,49,74,0.52)_48%,rgba(20,84,119,0.26)_70%,rgba(255,255,255,0.06)_100%)] dark:bg-[linear-gradient(92deg,rgba(8,18,30,0.92)_0%,rgba(9,29,49,0.84)_26%,rgba(13,51,77,0.6)_52%,rgba(20,91,124,0.3)_72%,rgba(255,255,255,0.08)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(153,223,255,0.22),transparent_24%),radial-gradient(circle_at_bottom_left,rgba(83,194,255,0.28),transparent_28%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(90,167,255,0.24),transparent_26%),radial-gradient(circle_at_bottom_left,rgba(34,193,214,0.18),transparent_28%)]" />
           <div className="absolute right-[-3rem] top-[-3rem] h-56 w-56 rounded-full bg-[var(--hero-orb-a)] blur-3xl" />
           <div className="absolute bottom-[-4rem] left-[-2rem] h-64 w-64 rounded-full bg-[var(--hero-orb-b)] blur-3xl" />
 
@@ -57,7 +57,7 @@ export function HeroSection({ categories, products }: Props) {
                 reliable everyday devices in one refined storefront.
               </p>
 
-              <div className="mt-6 rounded-[2rem] border border-white/14 bg-[rgba(255,248,244,0.18)] p-3 shadow-[0_24px_54px_rgba(0,0,0,0.2)] backdrop-blur-xl dark:border-white/12 dark:bg-[rgba(255,250,246,0.16)]">
+              <div className="mt-6 rounded-[2rem] border border-white/16 bg-[rgba(241,248,255,0.22)] p-3 shadow-[0_24px_54px_rgba(0,0,0,0.2)] backdrop-blur-xl dark:border-white/12 dark:bg-[rgba(255,250,246,0.16)]">
                 <div className="flex flex-col gap-3 md:flex-row md:items-center">
                   <div className="flex flex-1 items-center gap-3 rounded-[1.5rem] border border-white/16 bg-[rgba(255,255,255,0.92)] px-4 py-4 shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
                     <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--search-icon-bg)] text-[var(--brand)]">
@@ -81,7 +81,7 @@ export function HeroSection({ categories, products }: Props) {
                   <Link
                     key={item}
                     href="#catalog"
-                    className="rounded-full border border-white/18 bg-white/14 px-4 py-2 text-sm text-white/88 shadow-[0_8px_18px_rgba(0,0,0,0.12)] backdrop-blur-md transition hover:bg-white/2 dark:bg-white/12 dark:hover:bg-white/18"
+                    className="rounded-full border border-white/20 bg-white/16 px-4 py-2 text-sm text-white/92 shadow-[0_8px_18px_rgba(0,0,0,0.12)] backdrop-blur-md transition hover:bg-white/24 dark:bg-white/12 dark:hover:bg-white/18"
                   >
                     {item}
                   </Link>
@@ -92,7 +92,7 @@ export function HeroSection({ categories, products }: Props) {
                 {featureBadges.map((feature) => (
                   <div
                     key={feature.title}
-                    className="rounded-[1.7rem] border border-white/14 bg-[rgba(24,17,22,0.54)] p-5 text-white shadow-[0_16px_36px_rgba(0,0,0,0.16)] backdrop-blur-md dark:border-white/12 dark:bg-[rgba(16,11,15,0.58)]"
+                    className="rounded-[1.7rem] border border-white/14 bg-[rgba(9,25,42,0.62)] p-5 text-white shadow-[0_16px_36px_rgba(0,0,0,0.16)] backdrop-blur-md dark:border-white/12 dark:bg-[rgba(16,11,15,0.58)]"
                   >
                     <feature.icon size={18} className="text-[var(--brand-dark)]" />
                     <p className="mt-3 text-sm font-semibold">{feature.title}</p>
@@ -157,7 +157,7 @@ export function HeroSection({ categories, products }: Props) {
 
         <div className="grid gap-5">
           <div className="relative overflow-hidden rounded-[2.2rem] bg-[image:var(--accent-strong)] p-6 text-white shadow-[var(--shadow)]">
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.08))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(0,0,0,0.14))]" />
             <p className="text-xs uppercase tracking-[0.22em] text-white/70">
               Trending now
             </p>
@@ -166,7 +166,7 @@ export function HeroSection({ categories, products }: Props) {
                 <Link
                   key={product.id}
                   href={`/product/${product.slug}`}
-                  className="flex items-center justify-between rounded-[1.35rem] border border-white/10 bg-white/12 px-4 py-3 backdrop-blur-sm transition hover:bg-white/18"
+                  className="flex items-center justify-between rounded-[1.35rem] border border-white/14 bg-white/14 px-4 py-3 backdrop-blur-sm transition hover:bg-white/20"
                 >
                   <div>
                     <p className="font-semibold">{product.name}</p>

@@ -3,10 +3,10 @@
 :root {
   --background: #f3f8fd;
   --foreground: #16222d;
-  --muted: #5b6f82;
+  --muted: #42586d;
   --card: rgba(249, 252, 255, 0.82);
   --card-strong: #ffffff;
-  --line: rgba(35, 63, 91, 0.14);
+  --line: rgba(27, 54, 82, 0.16);
   --brand: #2563eb;
   --brand-dark: #0f4fd6;
   --accent: #0ea5c6;
@@ -16,11 +16,11 @@
   --shadow: 0 22px 60px rgba(25, 56, 90, 0.1);
   --header-bg: rgba(243, 248, 253, 0.92);
   --promo-strip:
-    linear-gradient(90deg, rgba(232, 244, 255, 0.98) 0%, rgba(212, 234, 255, 0.98) 48%, rgba(236, 247, 255, 0.98) 100%);
+    linear-gradient(90deg, rgba(223, 239, 255, 0.99) 0%, rgba(194, 225, 255, 0.99) 48%, rgba(228, 242, 255, 0.99) 100%);
   --nav-pill: rgba(255, 255, 255, 0.94);
   --nav-pill-shadow: 0 12px 28px rgba(25, 56, 90, 0.07);
   --surface-elevated: rgba(255, 255, 255, 0.97);
-  --surface-soft: rgba(240, 247, 255, 0.94);
+  --surface-soft: rgba(231, 242, 255, 0.96);
   --surface-soft-hover: rgba(255, 255, 255, 0.98);
   --search-shell: rgba(245, 250, 255, 0.96);
   --search-input: rgba(255, 255, 255, 0.98);
@@ -28,12 +28,13 @@
   --search-ring: rgba(37, 99, 235, 0.16);
   --search-icon-bg: rgba(37, 99, 235, 0.12);
   --promo-panel:
-    radial-gradient(circle at top right, rgba(159, 215, 255, 0.34), transparent 32%),
-    linear-gradient(145deg, rgba(247, 251, 255, 0.99) 0%, rgba(232, 244, 255, 0.99) 52%, rgba(214, 235, 252, 0.99) 100%);
+    radial-gradient(circle at top right, rgba(116, 193, 255, 0.34), transparent 32%),
+    linear-gradient(145deg, rgba(241, 248, 255, 0.99) 0%, rgba(223, 238, 255, 0.99) 52%, rgba(201, 226, 248, 0.99) 100%);
   --editorial-bg:
-    radial-gradient(circle at top left, rgba(185, 226, 255, 0.56), transparent 34%),
-    radial-gradient(circle at bottom right, rgba(109, 185, 255, 0.18), transparent 30%),
-    linear-gradient(145deg, rgba(250, 253, 255, 0.99) 0%, rgba(235, 245, 255, 0.99) 42%, rgba(215, 234, 250, 0.99) 100%);
+    radial-gradient(circle at top left, rgba(170, 225, 255, 0.66), transparent 32%),
+    radial-gradient(circle at 82% 24%, rgba(79, 149, 255, 0.22), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(14, 165, 198, 0.16), transparent 28%),
+    linear-gradient(145deg, rgba(247, 251, 255, 0.99) 0%, rgba(228, 240, 255, 0.99) 40%, rgba(196, 221, 245, 0.99) 100%);
   --footer-bg: rgba(238, 246, 255, 0.94);
   --auth-hero-bg:
     linear-gradient(145deg, rgba(255, 249, 241, 0.98) 0%, rgba(249, 233, 217, 0.98) 36%, rgba(238, 203, 171, 0.98) 100%);
@@ -57,13 +58,13 @@
   --product-tag-text: #1b1a17;
   --product-tag-shadow: 0 8px 20px rgba(52, 33, 11, 0.1);
   --product-tag-border: rgba(27, 26, 23, 0.14);
-  --product-chip-bg: rgba(37, 99, 235, 0.12);
+  --product-chip-bg: rgba(37, 99, 235, 0.16);
   --cta-solid: #16222d;
   --cta-solid-hover: #22364a;
   --hero-orb-a: rgba(78, 151, 255, 0.28);
   --hero-orb-b: rgba(14, 165, 198, 0.24);
   --eyebrow-border: rgba(37, 99, 235, 0.18);
-  --eyebrow-bg: rgba(240, 247, 255, 0.86);
+  --eyebrow-bg: rgba(229, 241, 255, 0.92);
   --admin-shell-bg:
     radial-gradient(circle at top left, rgba(188, 90, 43, 0.12), transparent 24%),
     radial-gradient(circle at bottom right, rgba(31, 107, 87, 0.12), transparent 22%);
@@ -116,9 +117,10 @@
     radial-gradient(circle at top right, rgba(90, 167, 255, 0.14), transparent 28%),
     linear-gradient(145deg, rgba(11, 20, 31, 0.99) 0%, rgba(15, 31, 48, 0.99) 52%, rgba(16, 43, 67, 0.99) 100%);
   --editorial-bg:
-    radial-gradient(circle at top left, rgba(90, 167, 255, 0.18), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(34, 193, 214, 0.12), transparent 24%),
-    linear-gradient(145deg, rgba(10, 18, 28, 0.99) 0%, rgba(16, 31, 46, 0.99) 46%, rgba(18, 47, 70, 0.99) 100%);
+    radial-gradient(circle at top left, rgba(90, 167, 255, 0.2), transparent 30%),
+    radial-gradient(circle at 84% 20%, rgba(34, 193, 214, 0.12), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(90, 167, 255, 0.08), transparent 22%),
+    linear-gradient(145deg, rgba(10, 18, 28, 0.99) 0%, rgba(15, 30, 46, 0.99) 44%, rgba(16, 45, 69, 0.99) 100%);
   --footer-bg: rgba(12, 19, 29, 0.94);
   --auth-hero-bg: linear-gradient(145deg, #10161b 0%, #8f4620 42%, #d87843 100%);
   --auth-hero-border: rgba(240, 161, 111, 0.12);
