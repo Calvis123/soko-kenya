@@ -51,8 +51,8 @@ export default async function ProductDetailPage({
         <span className="line-clamp-1 text-[var(--foreground)]">{product.name}</span>
       </div>
 
-      <div className="mt-6 grid gap-8 xl:grid-cols-[1.08fr_0.92fr_300px]">
-        <div className="grid gap-4">
+      <div className="mt-6 grid gap-8 xl:grid-cols-[minmax(0,1fr)_300px]">
+        <div className="grid gap-6">
           <ProductGallery images={product.images} name={product.name} />
           <div className="glass-card rounded-[1.8rem] p-5">
             <div className="flex items-center justify-between gap-4">
@@ -90,124 +90,125 @@ export default async function ProductDetailPage({
               </div>
             </div>
           </div>
-        </div>
+          <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+            <div className="glass-card h-fit rounded-[2rem] p-8">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="eyebrow">{categoryLabel}</span>
+                <span className="rounded-full bg-[rgba(188,90,43,0.12)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand-dark)]">
+                  {safeTags[0] ?? "Top pick"}
+                </span>
+              </div>
 
-        <div className="grid gap-6">
-          <div className="glass-card h-fit rounded-[2rem] p-8">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="eyebrow">{categoryLabel}</span>
-              <span className="rounded-full bg-[rgba(188,90,43,0.12)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand-dark)]">
-                {safeTags[0] ?? "Top pick"}
-              </span>
-            </div>
+              <h1 className="section-title mt-5 text-[clamp(2rem,2.4vw,3rem)]">
+                {product.name}
+              </h1>
 
-            <h1 className="section-title mt-5 text-[clamp(2rem,2.4vw,3rem)]">
-              {product.name}
-            </h1>
+              <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
+                <p className="font-semibold text-[var(--foreground)]">
+                  {product.rating} / 5
+                </p>
+                <p className="text-[var(--muted)]">{product.reviewCount} ratings</p>
+                <p className="text-[var(--accent)]">{stockTone}</p>
+              </div>
 
-            <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
-              <p className="font-semibold text-[var(--foreground)]">
-                {product.rating} / 5
-              </p>
-              <p className="text-[var(--muted)]">{product.reviewCount} ratings</p>
-              <p className="text-[var(--accent)]">{stockTone}</p>
-            </div>
-
-            <div className="mt-6 rounded-[1.8rem] border border-[var(--line)] bg-[var(--card-strong)] p-5">
-              <div className="flex flex-wrap items-end justify-between gap-4">
-                <div>
-                  <p className="text-3xl font-bold text-[var(--foreground)]">
-                    {formatCurrency(product.price)}
+              <div className="mt-6 rounded-[1.8rem] border border-[var(--line)] bg-[var(--card-strong)] p-5">
+                <div className="flex flex-wrap items-end justify-between gap-4">
+                  <div>
+                    <p className="text-3xl font-bold text-[var(--foreground)]">
+                      {formatCurrency(product.price)}
+                    </p>
+                    <div className="mt-2 flex flex-wrap items-center gap-3 text-sm">
+                      <span className="text-[var(--muted)] line-through">
+                        {formatCurrency(listPrice)}
+                      </span>
+                      <span className="rounded-full bg-[rgba(188,90,43,0.12)] px-3 py-1 font-semibold text-[var(--brand-dark)]">
+                        Save {formatCurrency(savings)}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="rounded-full bg-[rgba(31,107,87,0.12)] px-4 py-2 text-sm font-semibold text-[var(--accent)]">
+                    {product.stock} units available
                   </p>
-                  <div className="mt-2 flex flex-wrap items-center gap-3 text-sm">
-                    <span className="text-[var(--muted)] line-through">
-                      {formatCurrency(listPrice)}
-                    </span>
-                    <span className="rounded-full bg-[rgba(188,90,43,0.12)] px-3 py-1 font-semibold text-[var(--brand-dark)]">
-                      Save {formatCurrency(savings)}
-                    </span>
+                </div>
+              </div>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="rounded-[1.5rem] bg-[var(--surface-soft)] p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
+                    Delivery
+                  </p>
+                  <p className="mt-2 text-lg font-semibold">1 - 3 business days</p>
+                </div>
+                <div className="rounded-[1.5rem] bg-[var(--surface-soft)] p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
+                    Payment
+                  </p>
+                  <p className="mt-2 text-lg font-semibold">M-Pesa ready</p>
+                </div>
+                <div className="rounded-[1.5rem] bg-[var(--surface-soft)] p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
+                    Seller
+                  </p>
+                  <p className="mt-2 text-lg font-semibold">Soko Kenya</p>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <AddToCartButton product={product} />
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-2">
+                {safeTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-1 text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-6">
+              <div className="glass-card rounded-[2rem] p-6">
+                <p className="font-mono text-2xl font-semibold">Description</p>
+                <div className="mt-5 rounded-[1.8rem] border border-[var(--line)] bg-[linear-gradient(145deg,var(--surface-soft),var(--card-strong))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
+                  <p className="text-base leading-8 text-[var(--foreground)]/88">
+                    {product.description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-card rounded-[2rem] p-6">
+                <p className="font-mono text-2xl font-semibold">Product details</p>
+                <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-[1.5rem] border border-[var(--line)] p-4">
+                    <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
+                      Category
+                    </p>
+                    <p className="mt-2 font-semibold">{categoryLabel}</p>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-[var(--line)] p-4">
+                    <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
+                      SKU
+                    </p>
+                    <p className="mt-2 font-semibold">{product.slug}</p>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-[var(--line)] p-4">
+                    <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
+                      Ratings
+                    </p>
+                    <p className="mt-2 font-semibold">
+                      {product.rating} from {product.reviewCount} shoppers
+                    </p>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-[var(--line)] p-4">
+                    <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
+                      Stock level
+                    </p>
+                    <p className="mt-2 font-semibold">{product.stock} units</p>
                   </div>
                 </div>
-                <p className="rounded-full bg-[rgba(31,107,87,0.12)] px-4 py-2 text-sm font-semibold text-[var(--accent)]">
-                  {product.stock} units available
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 rounded-[1.8rem] border border-[var(--line)] bg-[linear-gradient(145deg,var(--surface-soft),var(--card-strong))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
-              <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-                Description
-              </p>
-              <p className="mt-3 text-base leading-8 text-[var(--foreground)]/88">
-                {product.description}
-              </p>
-            </div>
-
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-[1.5rem] bg-[var(--surface-soft)] p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-                  Delivery
-                </p>
-                <p className="mt-2 text-lg font-semibold">1 - 3 business days</p>
-              </div>
-              <div className="rounded-[1.5rem] bg-[var(--surface-soft)] p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-                  Payment
-                </p>
-                <p className="mt-2 text-lg font-semibold">M-Pesa ready</p>
-              </div>
-              <div className="rounded-[1.5rem] bg-[var(--surface-soft)] p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-                  Seller
-                </p>
-                <p className="mt-2 text-lg font-semibold">Soko Kenya</p>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <AddToCartButton product={product} />
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-2">
-              {safeTags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-1 text-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="glass-card rounded-[2rem] p-6">
-            <p className="font-mono text-2xl font-semibold">Product details</p>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-[1.5rem] border border-[var(--line)] p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-                  Category
-                </p>
-                <p className="mt-2 font-semibold">{categoryLabel}</p>
-              </div>
-              <div className="rounded-[1.5rem] border border-[var(--line)] p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-                  SKU
-                </p>
-                <p className="mt-2 font-semibold">{product.slug}</p>
-              </div>
-              <div className="rounded-[1.5rem] border border-[var(--line)] p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-                  Ratings
-                </p>
-                <p className="mt-2 font-semibold">
-                  {product.rating} from {product.reviewCount} shoppers
-                </p>
-              </div>
-              <div className="rounded-[1.5rem] border border-[var(--line)] p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-                  Stock level
-                </p>
-                <p className="mt-2 font-semibold">{product.stock} units</p>
               </div>
             </div>
           </div>
