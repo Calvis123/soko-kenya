@@ -26,8 +26,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
 
     const storedTheme = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return storedTheme ?? (systemPrefersDark ? "dark" : "light");
+    return storedTheme ?? "light";
   });
 
   useEffect(() => {

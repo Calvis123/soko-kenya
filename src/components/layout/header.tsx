@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Menu, ShoppingBag, UserRound } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/components/auth/auth-provider";
 import { useCart } from "@/components/cart/cart-provider";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
@@ -46,6 +46,24 @@ export function Header() {
     router.push("/");
     router.refresh();
   }
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    function handleScroll() {
+      if (window.innerWidth < 768) {
+        setOpen(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--header-bg)]/96 backdrop-blur-2xl">

@@ -23,7 +23,12 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
 
   return (
-    <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className="h-full antialiased"
+      data-scroll-behavior="smooth"
+      data-theme="light"
+    >
       <body className="min-h-full">
         <ThemeProvider>
           <AuthProvider initialUser={currentUser}>
